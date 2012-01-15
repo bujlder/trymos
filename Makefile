@@ -18,7 +18,7 @@ LD		= $(CROSS_COMPILE)ld
 OBJCOPY		= $(CROSS_COMPILE)objcopy
 
 $(TARGET) : $(TARGET).bin
-	$(QEMU) -M realview-pbx-a9 -m 128M -kernel $<
+	$(QEMU) -M realview-pbx-a9 -smp 1 -m 128M -kernel $<
 
 $(TARGET).bin : $(TARGET).elf
 	$(OBJCOPY) -O binary $< $@

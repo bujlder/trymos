@@ -58,7 +58,7 @@ void kputc(int c)
     raw_write32(c, (void *)0x10009000);
 }
 
-void kprint(const char *fmt, ...)
+void printk(const char *fmt, ...)
 {
     int c;
     int d;

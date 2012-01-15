@@ -1,7 +1,6 @@
 	.section "x"
 
 	.global start
-
 	
 start:
 	b	vector_copy
@@ -76,7 +75,7 @@ prefetch_entry:	/* G */
 	.word	0x10009000
 
 vector_copy:
-	ldr	r1,	=0x70010000
+	ldr	r1,	=0x0
 	mov	r2,	r1
 	ldr	r7,	=vector_start
 	ldr	r8,	=vector_copy
@@ -91,5 +90,12 @@ vector_copy:
 	teq	r1,	r2	
 	bne	1b
 	ldr	sp,	=stack_top
+
+	/* enable irq */
+	mrs	r2, cpsr
+	ldr	r3, =0xffffff7f
+	and	r2, r3
+	msr	cpsr_c, r2
+	
 	bl	main
 	b	vector_copy
